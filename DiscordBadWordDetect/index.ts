@@ -6,6 +6,7 @@ const B = /[" "]/gi;
 const N = /[0-9]/g;
 const CON = /[ㅏ-ㅣ]/g;
 const COL = /[ㄱ-ㅎ]/g;
+const E = /[a-z]/g;
 
 const client = new Client({
   intents: [
@@ -53,7 +54,10 @@ client.on("message", (msg: Message) => {
     var message = msg.content.replace(SC, "");
     SerachMSG(message, msg);
 
-    message = message.replace(B, "");
+    message = message.replace(E, "");
+    SerachMSG(message, msg);
+
+    message = message.replace(COL, "");
     SerachMSG(message, msg);
 
     message = message.replace(N, "");
@@ -62,8 +66,10 @@ client.on("message", (msg: Message) => {
     message = message.replace(CON, "");
     SerachMSG(message, msg);
 
-    message = message.replace(COL, "");
+    message = message.replace(B, "");
     SerachMSG(message, msg);
+
+
     var d: Array<string> = [];
 
     a.forEach(dd => {
