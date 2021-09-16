@@ -54,19 +54,19 @@ client.on("message", (msg: Message) => {
     var message = msg.content.replace(SC, "");
     SerachMSG(message, msg);
 
-    message = message.replace(E, "");
-    SerachMSG(message, msg);
-
-    message = message.replace(COL, "");
+    message = message.replace(B, "");
     SerachMSG(message, msg);
 
     message = message.replace(N, "");
     SerachMSG(message, msg);
 
+    message = message.replace(COL, "");
+    SerachMSG(message, msg);
+
     message = message.replace(CON, "");
     SerachMSG(message, msg);
 
-    message = message.replace(B, "");
+    message = message.replace(E, "");
     SerachMSG(message, msg);
 
 
@@ -84,15 +84,18 @@ client.on("message", (msg: Message) => {
       str += data;
     });
 
+    if(str == "")return;
+
     const embed = new MessageEmbed()
+    .setAuthor(`${msg.author.username}님께 안내를 드립니다.`, msg.author.displayAvatarURL({format: "png"}))
     .setColor('#f9aB25')
     .setThumbnail("https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-1/cp0/p50x50/70969678_1359232067587109_5802521046191964160_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=dbb9e7&_nc_ohc=-Psh2UUUCCYAX9UJ_sF&_nc_ht=scontent-ssn1-1.xx&oh=5150f36aaaa69b7d5f39bbd81a2246dc&oe=61683087")
-    .setTitle('욕설이 감지 되었습니다.')
+    .setTitle('현재 당신의 채팅에서 욕설이 감지 되었습니다.')
     .setDescription(`욕설을 하시는지 학생회에서 모니터링 중입니다.`)
-    .addFields({name: `${msg.author.username}님!`, value: `${str}`})
-    .setImage("https://pbs.twimg.com/profile_images/1343564274954694656/qGPtEBCk_200x200.jpg")
+    .addFields({name: '감지된 욕설', value: `${str}`})
+    .setImage(msg.author.displayAvatarURL({format: "png"}))
     .setFooter('질문사항은 ~~으로 연락 주시기 바랍니다.', "https://cdn-icons-png.flaticon.com/512/3179/3179517.png");
-
+    //https://pbs.twimg.com/profile_images/1343564274954694656/qGPtEBCk_200x200.jpg
 
     msg.reply({embeds: [embed]});
 
