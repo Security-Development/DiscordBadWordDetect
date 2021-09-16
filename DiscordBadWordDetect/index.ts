@@ -78,7 +78,7 @@ client.on("message", (msg: Message) => {
       }
     });
 
-    let str = "";
+    let str: string = "";
 
     d.forEach(data => {
       str += data;
