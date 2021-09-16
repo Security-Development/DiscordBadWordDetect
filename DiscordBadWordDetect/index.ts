@@ -1,4 +1,4 @@
-import {Client, Message, Intents} from "discord.js";
+import {Client, Message, Intents, MessageEmbed } from "discord.js";
 import fs from "fs";
 
 const SC = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
@@ -33,7 +33,7 @@ const SerachMSG = (msg: string, message:Message) =>
     if(filter.indexOf(word) != -1)
     {
       if(!word) continue;
-      a.push(`문장에서 "${word}" 비속어가 발견 되었습니다.`);
+      a.push(`문장에서 "${word}" 비속어가 발견 되었습니다.\n`);
     }
 
   }
@@ -78,11 +78,28 @@ client.on("message", (msg: Message) => {
       }
     });
 
+    let str = "";
+
     d.forEach(aaaa => {
-      msg.reply(aaaa);
+        //`${msg.author.username}님!\n${aaaa}\n치즈덕 사진이나 받아랏!\n${c}`);
+
+      str += aaaa;
     });
+
+    const embed = new MessageEmbed()
+    .setColor('#f9aB25')
+    .setThumbnail("https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-1/cp0/p50x50/70969678_1359232067587109_5802521046191964160_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=dbb9e7&_nc_ohc=-Psh2UUUCCYAX9UJ_sF&_nc_ht=scontent-ssn1-1.xx&oh=5150f36aaaa69b7d5f39bbd81a2246dc&oe=61683087")
+    .setTitle('욕설이 감지 되었습니다.')
+    .setDescription(`욕설을 하시는지 학생회에서 모니터링 중입니다.`)
+    .addFields({name: `${msg.author.username}님!`, value: `${str}`})
+    .setImage("https://pbs.twimg.com/profile_images/1343564274954694656/qGPtEBCk_200x200.jpg")
+    .setFooter('질문사항은 ~~으로 연락 주시기 바랍니다.', "https://cdn-icons-png.flaticon.com/512/3179/3179517.png");
+
+
+    msg.reply({embeds: [embed]});
 
     a = [];
 
 });
+
 client.login("token");
