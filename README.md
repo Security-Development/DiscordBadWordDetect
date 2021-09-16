@@ -3,4 +3,4 @@
 ---
 최적화가 안된 단순 기능 구현
 
-![image](https://user-images.githubusercontent.com/35417717/133534251-963e0347-d6c2-4387-bab0-f42aabf81800.png)
+![image](https://user-images.githubusercontent.com/35417717/133537209-b704cdb5-b3ec-434f-9e6c-a491d6fe43eb.png)
