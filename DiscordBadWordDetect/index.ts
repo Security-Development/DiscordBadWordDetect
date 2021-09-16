@@ -80,10 +80,8 @@ client.on("message", (msg: Message) => {
 
     let str = "";
 
-    d.forEach(aaaa => {
-        //`${msg.author.username}님!\n${aaaa}\n치즈덕 사진이나 받아랏!\n${c}`);
-
-      str += aaaa;
+    d.forEach(data => {
+      str += data;
     });
 
     const embed = new MessageEmbed()
