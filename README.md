@@ -1,2 +1,2 @@
 # DiscordBadWordDetect
-![image](https://user-images.githubusercontent.com/35417717/133409627-3a52c300-ef38-415e-9556-8d5f07ebd5ec.png)
+![image](https://user-images.githubusercontent.com/35417717/133534251-963e0347-d6c2-4387-bab0-f42aabf81800.png)
