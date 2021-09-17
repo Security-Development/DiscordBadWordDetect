@@ -1,12 +1,16 @@
 import {Client, Message, Intents, MessageEmbed } from "discord.js";
 import fs from "fs";
 
-const SC = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
-const B = /[" "]/gi;
-const N = /[0-9]/g;
-const CON = /[ㅏ-ㅣ]/g;
-const COL = /[ㄱ-ㅎ]/g;
-const E = /[a-z]/g;
+const RegExpType: Array<RegExp> = [
+  /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
+  /[" "]/gi,
+  /[0-9]/g,
+  /[ㄱ-ㅎ]/g,
+  /[ㅏ-ㅣ]/g,
+  /[a-z]/g
+];
+
+var strMessage = "";
 
 const client = new Client({
   intents: [
@@ -44,6 +48,11 @@ const SerachMSG = (msg: string, message:Message) =>
 
 }
 
+const FilterMSG = (msg: Message, type: RegExp)=> {
+  strMessage = strMessage.replace(type, "");
+  SerachMSG(strMessage, msg);
+}
+
 client.on("ready", () => {
   console.log(`Notice : Bot is Listening!!`);
 
@@ -51,36 +60,23 @@ client.on("ready", () => {
 
 client.on("message", (msg: Message) => {
   if(msg.author.bot) return;
-    var message = msg.content.replace(SC, "");
-    SerachMSG(message, msg);
+  strMessage = msg.content;
+  Object.values(RegExpType).forEach(data => {
+    FilterMSG(msg, data);
+    console.log(strMessage+"\n");
+  });
 
-    message = message.replace(B, "");
-    SerachMSG(message, msg);
-
-    message = message.replace(N, "");
-    SerachMSG(message, msg);
-
-    message = message.replace(COL, "");
-    SerachMSG(message, msg);
-
-    message = message.replace(CON, "");
-    SerachMSG(message, msg);
-
-    message = message.replace(E, "");
-    SerachMSG(message, msg);
-
-
-    var d: Array<string> = [];
+    var arr: Array<string> = [];
 
     a.forEach(dd => {
-      if (!d.includes(dd)) {
-        d.push(dd);
+      if (!arr.includes(dd)) {
+        arr.push(dd);
       }
     });
 
     let str: string = "";
 
-    d.forEach(data => {
+    arr.forEach(data => {
       str += data;
     });
 
@@ -95,7 +91,6 @@ client.on("message", (msg: Message) => {
     .addFields({name: '감지된 욕설', value: `${str}`})
     .setImage(msg.author.displayAvatarURL({format: "png"}))
     .setFooter('질문사항은 ~~으로 연락 주시기 바랍니다.', "https://cdn-icons-png.flaticon.com/512/3179/3179517.png");
-    //https://pbs.twimg.com/profile_images/1343564274954694656/qGPtEBCk_200x200.jpg
 
     msg.reply({embeds: [embed]});
 
