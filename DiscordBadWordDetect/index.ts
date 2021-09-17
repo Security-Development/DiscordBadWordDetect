@@ -63,7 +63,7 @@ client.on("message", (msg: Message) => {
   strMessage = msg.content;
   Object.values(RegExpType).forEach(data => {
     FilterMSG(msg, data);
-    console.log(strMessage+"\n");
+    //console.log(strMessage+"\n");
   });
 
     var arr: Array<string> = [];
