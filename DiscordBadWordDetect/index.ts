@@ -28,7 +28,7 @@ const SerachMSG = (msg: string, message:Message) =>
 {
   const data: Array<string> = fs.readFileSync("./data/WordData.txt").toString().split("\n");
 
-  var filter: string = msg;
+  var filter: string = msg.toLowerCase();
 
   for(let i = 0; i < data.length; i++)
   {
